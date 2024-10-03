@@ -1,5 +1,7 @@
+import TaskManager from "./pages/TaskManager";
+
 function App() {
-  return <h1 className="text-3xl text-green-600 font-bold underline">Hello world!</h1>;
+  return <TaskManager />
 }
 
 export default App;
