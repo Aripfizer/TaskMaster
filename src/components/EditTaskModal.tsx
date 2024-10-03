@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTaskStore } from "../store/taskStore";
+import Modal from "./Modal";
 
 interface EditTaskModalProps {
   taskId: number | null; // taskId est nullable (null au début)
@@ -38,60 +39,50 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-1/3 relative">
-        <button
-          onClick={onClose}
-          className="absolute -top-3 -right-3 bg-red-500 hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white transition duration-500"
+    <Modal title="Éditer la tâche" isOpen={isOpen} onClose={onClose}>
+      <form onSubmit={handleSubmit}>
+        <label
+          htmlFor="task-title"
+          className="block text-sm font-medium text-gray-700 mb-2"
         >
-          &times;
-        </button>
+          Titre de la Tâche
+        </label>
+        <input
+          id="task-title"
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+          className="block w-full border border-gray-300 rounded-md p-2 mb-4"
+        />
 
-        <h2 className="text-lg font-medium mb-4">Éditer la tâche</h2>
-        <form onSubmit={handleSubmit}>
-          <label
-            htmlFor="task-title"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
-            Titre de la Tâche
-          </label>
+        <label className="inline-flex items-center">
           <input
-            id="task-title"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            className="block w-full border border-gray-300 rounded-md p-2 mb-4"
+            type="checkbox"
+            checked={completed}
+            onChange={() => setCompleted(!completed)}
+            className="form-checkbox"
           />
+          <span className="ml-2">Complétée</span>
+        </label>
 
-          <label className="inline-flex items-center">
-            <input
-              type="checkbox"
-              checked={completed}
-              onChange={() => setCompleted(!completed)}
-              className="form-checkbox"
-            />
-            <span className="ml-2">Complétée</span>
-          </label>
-
-          <div className="flex justify-end mt-4">
-            <button
-              type="submit"
-              className="bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700"
-            >
-              Mettre à jour
-            </button>
-            <button
-              type="button"
-              onClick={onClose}
-              className="ml-2 bg-gray-200 text-gray-700 rounded-md px-4 py-2 hover:bg-gray-300"
-            >
-              Annuler
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+        <div className="flex justify-end mt-4">
+          <button
+            type="submit"
+            className="bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700"
+          >
+            Mettre à jour
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className="ml-2 bg-gray-200 text-gray-700 rounded-md px-4 py-2 hover:bg-gray-300"
+          >
+            Annuler
+          </button>
+        </div>
+      </form>
+    </Modal>
   );
 };
 

@@ -33,13 +33,11 @@ const TaskManager = () => {
   const [draggedTaskId, setDraggedTaskId] = useState<number | null>(null);
   const [dragPositions, setDragPositions] = useState<DragState>({});
 
-
   const handleDrag = (taskId: number, data: DraggableData) => {
     setDraggedTaskId(taskId);
     setDragPositions((prev) => ({ ...prev, [taskId]: { x: data.x, y: 0 } }));
     setIsDragging(true);
   };
-
 
   const handleDragStop = (taskId: number, data: DraggableData) => {
     setTimeout(() => setIsDragging(false), 0);
@@ -65,15 +63,15 @@ const TaskManager = () => {
       />
 
       <main className="w-full min-h-[100vh] bg-[rgb(171,173,176)] bg-gradient-to-t from-gray-400 via-gray-300 to-gray-100 flex items-center justify-center">
-        <div className="max-w-lg w-full max-h-[90vh] overflow-y-scroll overflow-x-hidden bg-gray-100 p-8 rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[6.9px]">
-          <h2 className="flex items-center justify-center mb-5 text-center bg-gray-50 text-2xl text-gray-700 font-bold uppercase py-4 shadow-sm">
+        <div className="max-w-lg w-full max-h-[90vh] overflow-y-scroll overflow-x-hidden mx-4 sm:x-10 bg-gray-100 p-8 rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[6.9px]">
+          <h2 className="flex items-center justify-center mb-5 text-center bg-gray-50 text-xl sm:text-2xl text-gray-700 font-bold uppercase py-4 px-2 shadow-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              className="size-7 mr-2"
+              className="sm:size-7 size-6 mr-2"
             >
               <path
                 stroke-linecap="round"
@@ -83,9 +81,11 @@ const TaskManager = () => {
             </svg>
             task-master
           </h2>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap">
             <div>
-              <h3 className="text-xl font-bold text-gray-700">Aujourd'hui</h3>
+              <h3 className="sm:text-xl text-lg font-bold text-gray-700">
+                Aujourd'hui
+              </h3>
               <p className="text-gray-400 font-medium text-xs">
                 {formatCurrentDate(new Date())}
               </p>
@@ -94,7 +94,7 @@ const TaskManager = () => {
             <div>
               <button
                 onClick={() => setIsAddModalOpen(true)}
-                className="flex items-center text-base py-2 px-4 bg-blue-100 hover:bg-blue-200 rounded border border-blue-300 text-sky-900 font-semibold transition duration-500"
+                className="flex items-center sm:text-base text-sm sm:py-2 sm:px-4 px-2 py-1 bg-blue-100 hover:bg-blue-200 rounded border border-blue-300 text-sky-900 font-semibold transition duration-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +102,7 @@ const TaskManager = () => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  className="size-5 mr-1"
+                  className="sm:size-5 size-4 mr-1"
                 >
                   <path
                     stroke-linecap="round"
@@ -114,7 +114,7 @@ const TaskManager = () => {
               </button>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-0 text-base font-medium mt-5">
+          <div className="flex items-center justify-between flex-wrap gap-2 sm:text-base text-sm font-medium sm:mt-5 mt-3">
             <button
               className={`flex items-center space-x-1 ${
                 filter === undefined ? "text-sky-700 font-bold" : null
@@ -127,7 +127,7 @@ const TaskManager = () => {
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                className="size-5"
+                className="sm:size-5 size-3"
               >
                 <path
                   stroke-linecap="round"
@@ -158,7 +158,7 @@ const TaskManager = () => {
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                className="size-5"
+                className="sm:size-5 size-3"
               >
                 <path
                   stroke-linecap="round"
@@ -187,7 +187,7 @@ const TaskManager = () => {
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                className="size-5"
+                className="sm:size-5 size-3"
               >
                 <path
                   stroke-linecap="round"
@@ -205,7 +205,7 @@ const TaskManager = () => {
               </div>
             </button>
           </div>
-          <div className="mt-8 space-y-4">
+          <div className="sm:mt-8 mt-4 space-y-4">
             {filteredTasks.length === 0 ? (
               <div className="text-center text-gray-500">
                 <p>Aucune tâche à afficher 🙄</p>
@@ -225,8 +225,9 @@ const TaskManager = () => {
                   }
                 >
                   <div
+                    title="Cliquer glisser pour supprimer"
                     onClick={() => openEditModal(task.id)}
-                    className={`relative bg-gray-100 rounded shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6 cursor-pointer ${
+                    className={`relative bg-gray-100 rounded shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-4 sm:p-6 cursor-pointer ${
                       task.completed ? "line-through" : ""
                     } transition-all duration-300 border-2 ${
                       draggedTaskId === task.id
