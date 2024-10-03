@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1727964341891" clover="3.2.0">
+  <project timestamp="1727964341891" name="All files">
+    <metrics statements="27" coveredstatements="4" conditionals="10" coveredconditionals="0" methods="17" coveredmethods="3" elements="54" coveredelements="7" complexity="0" loc="27" ncloc="27" packages="2" files="2" classes="2"/>
+    <package name="store">
+      <metrics statements="17" coveredstatements="4" conditionals="8" coveredconditionals="0" methods="16" coveredmethods="3"/>
+      <file name="taskStore.ts" path="D:\Workspace\React\TaskMaster\src\store\taskStore.ts">
+        <metrics statements="17" coveredstatements="4" conditionals="8" coveredconditionals="0" methods="16" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="49" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="59" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="utils">
+      <metrics statements="10" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="formatDate.ts" path="D:\Workspace\React\TaskMaster\src\utils\formatDate.ts">
+        <metrics statements="10" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
