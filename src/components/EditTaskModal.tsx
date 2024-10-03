@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useTaskStore } from "../store/taskStore";
+import { Task, useTaskStore } from "../store/taskStore";
 import Modal from "./Modal";
+import { useToast } from "../Providers/ToastProvider";
+import { Bounce } from "react-toastify";
 
 interface EditTaskModalProps {
   taskId: number | null; // taskId est nullable (null au début)
@@ -16,11 +18,14 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
   const { getTaskById, updateTask } = useTaskStore();
   const [title, setTitle] = useState("");
   const [completed, setCompleted] = useState(false);
+  const { notify } = useToast();
+  const [taskToUpdate, setTaskToUpdate] = useState<undefined | Task>(undefined);
 
   // Récupérer la tâche quand taskId ou isOpen change
   useEffect(() => {
     if (taskId !== null && isOpen) {
       const task = getTaskById(taskId);
+      setTaskToUpdate(task);
       if (task) {
         setTitle(task.title);
         setCompleted(task.completed);
@@ -28,10 +33,25 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
     }
   }, [taskId, isOpen, getTaskById]);
 
+  const notifySuccess = () =>
+    notify(`${taskToUpdate?.title} a été modifier`, {
+      type: "info",
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Bounce,
+    });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (taskId !== null) {
       updateTask(taskId, { title, completed });
+      notifySuccess();
       onClose(); // Ferme le modal après la mise à jour
     }
   };

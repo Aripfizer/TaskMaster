@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTaskStore } from "../store/taskStore";
 import Modal from "./Modal";
+import { useToast } from "../Providers/ToastProvider";
+import { Bounce } from "react-toastify";
 
 interface TaskModalProps {
   isOpen: boolean;
@@ -9,15 +11,31 @@ interface TaskModalProps {
 
 const TaskModal: React.FC<TaskModalProps> = ({ isOpen, onClose }) => {
   const { addTask } = useTaskStore();
+  const { notify } = useToast();
 
   const [title, setTitle] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const notifySuccess = () =>
+    notify(`${title} a été ajouter`, {
+      type: "success",
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Bounce,
+    });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (title.trim() !== "") {
       addTask(title);
+      notifySuccess();
       setTitle(""); // Clear input after adding task
     }
 

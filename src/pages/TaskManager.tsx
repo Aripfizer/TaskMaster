@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useTaskStore } from "../store/taskStore";
 import formatCurrentDate from "../utils/formatDate";
-import TaskModal from "../components/TaskModal";
+import TaskModal from "../components/AddTaskModal";
 import EditTaskModal from "../components/EditTaskModal";
 import Draggable, { DraggableData, DraggableEvent } from "react-draggable";
+import { useToast } from "../Providers/ToastProvider";
+import { Bounce } from "react-toastify";
 
 interface DragState {
   [key: string]: { x: number; y: number };
@@ -11,6 +13,7 @@ interface DragState {
 
 const TaskManager = () => {
   const [filter, setFilter] = useState<undefined | boolean>(undefined);
+  const { notify } = useToast();
 
   const { tasks, getTaskStats, deleteTask } = useTaskStore();
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
@@ -21,6 +24,21 @@ const TaskManager = () => {
     if (filter === undefined) return true; // Afficher toutes les tâches
     return task.completed === filter; // Filtrer selon l'état de complétion
   });
+
+  const notifySuccess = () =>
+    notify(`La tache a été supprimer`, {
+      type: "info",
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Bounce,
+    });
+
   const [isDragging, setIsDragging] = useState(false);
 
   const openEditModal = (taskId: number) => {
@@ -43,6 +61,7 @@ const TaskManager = () => {
     setTimeout(() => setIsDragging(false), 0);
     if (Math.abs(data.x) > 100) {
       deleteTask(taskId);
+      notifySuccess();
     } else {
       setDragPositions((prev) => ({ ...prev, [taskId]: { x: 0, y: 0 } }));
     }
