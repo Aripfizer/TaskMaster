@@ -324,38 +324,6 @@ const TaskManager = () => {
         </div>
       </main>
     </>
-
-    // <div className="task-manager">
-    //   <input
-    //     type="text"
-    //     value={newTask}
-    //     onChange={(e) => setNewTask(e.target.value)}
-    //     placeholder="Enter a task"
-    //     className="border p-2 mb-4"
-    //   />
-    //   <button
-    //     onClick={handleAddTask}
-    //     className="bg-blue-500 text-white px-4 py-2 rounded"
-    //   >
-    //     Add Task
-    //   </button>
-
-    //   <ul className="mt-4">
-    //     {tasks.map((task) => (
-    //       <li key={task.id} className="flex items-center space-x-4">
-    //         <span className={task.completed ? "line-through" : ""}>
-    //           {task.title}
-    //         </span>
-    //         <button
-    //           onClick={() => toggleTaskStatus(task.id)}
-    //           className="text-blue-600"
-    //         >
-    //           {task.completed ? "Undo" : "Complete"}
-    //         </button>
-    //       </li>
-    //     ))}
-    //   </ul>
-    // </div>
   );
 };
 
